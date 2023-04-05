@@ -1,0 +1,30 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+</head>
+<body>
+  <script>
+    // Get the ID from the URL
+    const id = window.location.pathname.replace("/", "");
+
+    // Fetch the JSON database
+    fetch("database.json")
+      .then(response => response.json())
+      .then(database => {
+        // Check if the ID exists in the database
+        if (id in database) {
+          // Redirect to the original URL
+          window.location.href = database[id];
+        } else {
+          // Redirect to a custom 404 page
+          window.location.href = "/404.html";
+        }
+      })
+      .catch(error => {
+        // Redirect to a custom error page if there was an error fetching the database
+        window.location.href = "/error.html";
+      });
+  </script>
+</body>
+</html>
